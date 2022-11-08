@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62ca14d-2d80-4e35-910a-f8d85c75e58c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/MariaCopete_TestCase_Design_TestNG.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MariaCopete_TestCase_Design_TestNG.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MariaCopete_TestCase_Design_TestNG.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/MariaCopete_TestCase_Design_TestNG.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MariaCopete_TestCase_Design_TestNG.iws" beforeDir="false" afterPath="$PROJECT_DIR$/MariaCopete_TestCase_Design_TestNG.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/globant/BaseClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/globant/BaseClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/globant/ESPNWebPageDeactivateAccountTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/globant/ESPNWebPageDeactivateAccountTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/globant/ESPNWebPageLoginTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/globant/ESPNWebPageLoginTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/globant/ESPNWebPageLogoutTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/globant/ESPNWebPageLogoutTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/globant/Suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/globant/Suite.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/globant/Suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/resources/Suite.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,15 +254,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/maria.copete/Documents/Bootcamp/Módulo 2/practica/WebAutomation"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/maria.copete/Documents/Bootcamp/Módulo 2/practica/WebAutomation&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\maria.copete\Documents\Bootcamp\Módulo 2\MariaCopete_TestCase_Design_TestNG\src\test\java\resources" />
       <recent name="C:\Users\maria.copete\Documents\Bootcamp\Módulo 2\MariaCopete_TestCase_Design_TestNG\src\test\java\com\globant" />
     </key>
   </component>
