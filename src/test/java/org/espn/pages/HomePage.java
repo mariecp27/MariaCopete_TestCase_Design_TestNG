@@ -3,6 +3,8 @@ package org.espn.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage {
 
@@ -14,6 +16,9 @@ public class HomePage extends BasePage {
 
     @FindBy (css = "div.global-user:last-child ul.account-management > li:last-child > a")
     private WebElement loginLinkInHomePage;
+
+    @FindBy (css = "div.global-user:last-child ul.account-management > li:last-child > a")
+    private WebElement logOutLinkInHomePage;
 
     @FindBy (id = "oneid-iframe")
     private WebElement loginIframe;
@@ -36,37 +41,89 @@ public class HomePage extends BasePage {
     @FindBy (id = "BtnCreateAccount")
     private WebElement signUpButtonIframe;
 
+    @FindBy (css = "li.pillar.watch > a")
+    private WebElement watchLink;
+
+    @FindBy (css = "div.global-user:last-child ul.account-management li.display-user")
+    private WebElement welcomeText;
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
+    public void mouseOverUserIcon() {
+        super.mouseOver(this.userIcon);
+        super.waitForVisibility(this.userOptionsContainer);
+    }
+
     public void clickOnLoginLinkInHomePage() {
-        clickElement(userIcon);
-        waitForVisibility(userOptionsContainer);
-        clickElement(loginLinkInHomePage);
+        super.clickElement(this.loginLinkInHomePage);
+    }
+
+    public void clickOnLogoutLinkInHomePage() {
+        super.clickElement(this.logOutLinkInHomePage);
     }
 
     public void switchToIframe() {
-        getDriver().switchTo().frame(loginIframe);
-    }
-
-    public boolean modalIsDisplayed() {
-        return loginModalIframe.isDisplayed();
-    }
-
-    public boolean espnLogoIsDisplayed() {
-        return espnLogoIframe.isDisplayed();
-    }
-
-    public boolean loginButtonIsDisplayed() {
-        return loginButtonIframe.isDisplayed();
-    }
-
-    public boolean signUpButtonIsDisplayed() {
-        return signUpButtonIframe.isDisplayed();
+        super.getDriver().switchTo().frame(this.loginIframe);
     }
 
     public void goOutFromIframe() {
-        getDriver().switchTo().defaultContent();
+        super.getDriver().switchTo().defaultContent();
+    }
+
+    public boolean modalIsDisplayed() {
+        super.waitForVisibility(this.loginModalIframe);
+        return this.loginModalIframe.isDisplayed();
+    }
+
+    public boolean espnLogoIsDisplayed() {
+        super.waitForVisibility(this.espnLogoIframe);
+        return this.espnLogoIframe.isDisplayed();
+    }
+
+    public boolean loginButtonIsDisplayed() {
+        super.waitForVisibility(this.loginButtonIframe);
+        return this.loginButtonIframe.isDisplayed();
+    }
+
+    public boolean signUpButtonIsDisplayed() {
+        super.waitForVisibility(this.signUpButtonIframe);
+        return this.signUpButtonIframe.isDisplayed();
+    }
+
+    public void typeOnEmailInput(String text) {
+        super.waitForVisibility(this.emailInputIframe);
+        super.typeOnInput(this.emailInputIframe, text);
+    }
+
+    public void typeOnPasswordInput(String text) {
+        super.waitForVisibility(this.passwordInputIframe);
+        super.typeOnInput(this.passwordInputIframe, text);
+    }
+
+    public void clickOnLoginButtonIframe() {
+        clickElement(this.loginButtonIframe);
+    }
+
+    public WatchPage goToWatchPage() {
+        if (super.waitForReload(this.watchLink)) {
+            super.waitForVisibility(this.watchLink);
+        }
+        super.clickElement(this.watchLink);
+        return new WatchPage(getDriver());
+    }
+
+    public String getWelcomeTextWhenLogged() {
+        super.waitForVisibility(this.welcomeText);
+        return this.welcomeText.getText();
+    }
+
+    public String getWelcomeTextWhenLoggedOut() {
+        if (waitForReload(this.welcomeText)) {
+            waitForVisibility(this.welcomeText);
+        }
+        mouseOverUserIcon();
+        return this.welcomeText.getText();
     }
 }

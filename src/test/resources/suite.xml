@@ -1,13 +1,16 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Test suite ESPN">
+    <listeners>
+        <listener class-name="org.espn.utils.Listener"/>
+    </listeners>
 
     <parameter name="url" value="https://www.espnqa.com/?src=com&amp;_adblock=true&amp;espn=cloud"/>
     <parameter name="browser" value="chrome"/>
 
     <test name="ESPN tests">
         <classes>
-            <class name="org.espn.tests.ESPNWebPageLoginTests"></class>
+            <class name="org.espn.tests.ESPNWebPageLoginTests"/>
         </classes>
     </test>
 </suite>

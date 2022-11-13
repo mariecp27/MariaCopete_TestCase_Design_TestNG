@@ -8,7 +8,7 @@ public class Driver {
 
     private WebDriver driver;
 
-    public Driver(String browser) {
+    public Driver() {
         WebDriverManager.chromedriver().setup();
         this.driver = new ChromeDriver();
     }
