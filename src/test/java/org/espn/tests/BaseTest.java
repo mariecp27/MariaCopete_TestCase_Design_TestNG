@@ -14,8 +14,8 @@ public class BaseTest {
 
     private Driver driver;
     protected HomePage homePage;
-    protected final String EMAIL = "test.email.for.espn@gmail.com";
-    protected final String PASSWORD = "testpassword202212";
+    protected final String EMAIL = "test.email.for.espn1@gmail.com";
+    protected final String PASSWORD = "testpassword2022";
     protected final String USER = "Test";
     protected final String USER_WELCOME = "Welcome" + USER + "!";
 
