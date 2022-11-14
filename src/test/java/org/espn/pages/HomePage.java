@@ -3,8 +3,6 @@ package org.espn.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BasePage {
 
@@ -21,7 +19,7 @@ public class HomePage extends BasePage {
     private WebElement logOutLinkInHomePage;
 
     @FindBy (id = "oneid-iframe")
-    private WebElement loginIframe;
+    private WebElement iframe;
 
     @FindBy (css = "div.view-starry-night >div:first-child")
     private WebElement loginModalIframe;
@@ -47,11 +45,29 @@ public class HomePage extends BasePage {
     @FindBy (css = "div.global-user:last-child ul.account-management li.display-user")
     private WebElement welcomeText;
 
-    @FindBy (css = "div.global-user:last-child ul.account-management li.display-user span")
-    private WebElement userName;
+    @FindBy (css = "div.global-user:last-child ul.account-management > li:nth-child(5) > a")
+    private WebElement espnProfileLink;
+
+    @FindBy (id = "AccountDeleteLink")
+    private WebElement deleteAccountLinkIframe;
+
+    @FindBy (css = "#TextBlock + #BtnSubmit")
+    private  WebElement deleteAccountButtonIframe;
+
+    @FindBy (css = "#TextError + #BtnSubmit")
+    private  WebElement deleteAccountConfirmationIframe;
+
+    @FindBy (css = ".account-deleted-gating + #Title")
+    private  WebElement deleteAccountTitleIframe;
 
     public HomePage(WebDriver driver) {
         super(driver);
+    }
+
+    public void waitForMouseOverUserIcon() {
+        if (waitForReload(this.userIcon)) {
+            waitForVisibility(this.userIcon);
+        }
     }
 
     public void mouseOverUserIcon() {
@@ -64,17 +80,11 @@ public class HomePage extends BasePage {
     }
 
     public void clickOnLogoutLinkInHomePage() {
-        if (waitForReload(this.userName)) {
-            mouseOverUserIcon();
-            super.clickElement(this.logOutLinkInHomePage);
-        } else {
-            mouseOverUserIcon();
-            super.clickElement(this.logOutLinkInHomePage);
-        }
+        super.clickElement(this.logOutLinkInHomePage);
     }
 
     public void switchToIframe() {
-        super.getDriver().switchTo().frame(this.loginIframe);
+        super.getDriver().switchTo().frame(this.iframe);
     }
 
     public void goOutFromIframe() {
@@ -123,16 +133,29 @@ public class HomePage extends BasePage {
         return new WatchPage(getDriver());
     }
 
-    public String getWelcomeTextWhenLogged() {
+    public String getWelcomeText() {
         super.waitForVisibility(this.welcomeText);
         return this.welcomeText.getText();
     }
 
-    public String getWelcomeTextWhenLoggedOut() {
-        if (waitForReload(this.welcomeText)) {
-            waitForVisibility(this.welcomeText);
-        }
-        mouseOverUserIcon();
-        return this.welcomeText.getText();
+    public void clickOnEspnProfileLink() {
+        clickElement(this.espnProfileLink);
+    }
+
+    public void clickOnDeleteAccountLinkIframe() {
+        clickElement(this.deleteAccountLinkIframe);
+    }
+
+    public void clickOnDeleteAccountButtonIframe() {
+        clickElement(this.deleteAccountButtonIframe);
+    }
+
+    public void clickOnDeleteAccountConfirmationIframe() {
+        clickElement(this.deleteAccountConfirmationIframe);
+    }
+
+    public String getDeleteAccountTitleIframeText() {
+        waitForVisibility(deleteAccountTitleIframe);
+        return this.deleteAccountTitleIframe.getText();
     }
 }

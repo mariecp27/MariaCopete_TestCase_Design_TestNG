@@ -11,6 +11,7 @@
         <classes>
             <class name="org.espn.tests.ESPNWebPageLoginTests"/>
             <class name="org.espn.tests.ESPNWebPageLogoutTests"/>
+            <class name="org.espn.tests.ESPNWebPageDeactivateAccountTests"/>
         </classes>
     </test>
 </suite>

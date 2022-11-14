@@ -13,7 +13,7 @@ public class BaseTest {
 
     private Driver driver;
     protected HomePage homePage;
-    protected final String EMAIL = "test.email.for.espn1@gmail.com";
+    protected final String EMAIL = "test.email.espn6@gmail.com";
     protected final String PASSWORD = "testpassword2022";
     protected final String USER = "Test";
     protected final String USER_WELCOME = "Welcome" + USER + "!";
@@ -44,7 +44,7 @@ public class BaseTest {
         }
     }
 
-    protected void loginSteps() {
+    protected void generalLoginSteps() {
         homePage.mouseOverUserIcon();
         homePage.clickOnLoginLinkInHomePage();
         homePage.switchToIframe();

@@ -26,8 +26,10 @@ public class ESPNWebPageLoginTests extends BaseTest {
         checkThat("Close button is visible", watchPage.switchToModal(), is(true));
         watchPage.returnToHomePage();
         homePage.mouseOverUserIcon();
-        checkThat("Welcome text is correct", homePage.getWelcomeTextWhenLogged(), is(USER_WELCOME));
+        checkThat("Welcome text is correct", homePage.getWelcomeText(), is(USER_WELCOME));
         homePage.clickOnLogoutLinkInHomePage();
-        checkThat("Welcome text is correct", homePage.getWelcomeTextWhenLoggedOut(), is("Welcome!"));
+        homePage.waitForMouseOverUserIcon();
+        homePage.mouseOverUserIcon();
+        checkThat("Welcome text is correct", homePage.getWelcomeText(), is("Welcome!"));
     }
 }
