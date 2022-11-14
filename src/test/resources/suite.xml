@@ -6,11 +6,11 @@
     </listeners>
 
     <parameter name="url" value="https://www.espnqa.com/?src=com&amp;_adblock=true&amp;espn=cloud"/>
-    <parameter name="browser" value="chrome"/>
 
     <test name="ESPN tests">
         <classes>
             <class name="org.espn.tests.ESPNWebPageLoginTests"/>
+            <class name="org.espn.tests.ESPNWebPageLogoutTests"/>
         </classes>
     </test>
 </suite>

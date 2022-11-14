@@ -49,11 +49,15 @@ public class WebOperations {
     public boolean waitForReload(WebElement element) {
         boolean wasDeleted = true;
         try {
-            this.wait.until(ExpectedConditions.stalenessOf(element));
+            waitForStaleness(element);
         } catch (TimeoutException e) {
             wasDeleted = false;
         }
         return wasDeleted;
+    }
+
+    public void waitForStaleness(WebElement element) {
+        this.wait.until(ExpectedConditions.stalenessOf(element));
     }
 
     public void mouseOver(WebElement element) {

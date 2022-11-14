@@ -47,6 +47,9 @@ public class HomePage extends BasePage {
     @FindBy (css = "div.global-user:last-child ul.account-management li.display-user")
     private WebElement welcomeText;
 
+    @FindBy (css = "div.global-user:last-child ul.account-management li.display-user span")
+    private WebElement userName;
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -61,7 +64,13 @@ public class HomePage extends BasePage {
     }
 
     public void clickOnLogoutLinkInHomePage() {
-        super.clickElement(this.logOutLinkInHomePage);
+        if (waitForReload(this.userName)) {
+            mouseOverUserIcon();
+            super.clickElement(this.logOutLinkInHomePage);
+        } else {
+            mouseOverUserIcon();
+            super.clickElement(this.logOutLinkInHomePage);
+        }
     }
 
     public void switchToIframe() {

@@ -5,9 +5,8 @@ import org.espn.pages.HomePage;
 import org.espn.reporting.Reporter;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
+
 import static java.lang.String.format;
 
 public class BaseTest {
@@ -19,9 +18,9 @@ public class BaseTest {
     protected final String USER = "Test";
     protected final String USER_WELCOME = "Welcome" + USER + "!";
 
-    @Parameters({"browser", "url"})
-    @BeforeTest
-    public void testSetUp(String browser, String url) {
+    @Parameters({"url"})
+    @BeforeClass
+    public void testSetUp(String url) {
         driver = new Driver();
         Reporter.info("Deleting all cookies");
         driver.getDriver().manage().deleteAllCookies();
@@ -31,7 +30,7 @@ public class BaseTest {
         homePage = new HomePage(driver.getDriver());
     }
 
-    @AfterTest
+    @AfterClass
     public void tearDown() {
         driver.getDriver().quit();
     }
@@ -43,5 +42,15 @@ public class BaseTest {
         } catch (AssertionError e) {
             Reporter.error(format("Assertion Error: [%s]", e.getMessage().replaceAll("\n", "")));
         }
+    }
+
+    protected void loginSteps() {
+        homePage.mouseOverUserIcon();
+        homePage.clickOnLoginLinkInHomePage();
+        homePage.switchToIframe();
+        homePage.typeOnEmailInput(EMAIL);
+        homePage.typeOnPasswordInput(PASSWORD);
+        homePage.clickOnLoginButtonIframe();
+        homePage.goOutFromIframe();
     }
 }
