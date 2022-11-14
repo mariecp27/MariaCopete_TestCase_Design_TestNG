@@ -33,11 +33,26 @@ public class HomePage extends BasePage {
     @FindBy (id = "InputPassword")
     private WebElement passwordInputIframe;
 
+    @FindBy (id = "InputFirstName")
+    private WebElement firstNameInputIframe;
+
+    @FindBy (id = "InputLastName")
+    private WebElement lastNameInputIframe;
+
+    @FindBy (id = "InputEmail")
+    private WebElement emailForSignUpInputIframe;
+
+    @FindBy (id = "password-new")
+    private WebElement passwordForSignUpInputIframe;
+
     @FindBy (id = "BtnSubmit")
     private WebElement loginButtonIframe;
 
     @FindBy (id = "BtnCreateAccount")
     private WebElement signUpButtonIframe;
+
+    @FindBy (id = "BtnSubmit")
+    private WebElement signUpButtonForSignUpIframe;
 
     @FindBy (css = "li.pillar.watch > a")
     private WebElement watchLink;
@@ -59,6 +74,9 @@ public class HomePage extends BasePage {
 
     @FindBy (css = ".account-deleted-gating + #Title")
     private  WebElement deleteAccountTitleIframe;
+
+    @FindBy (css = "sideLogin-right-rail")
+    private WebElement loginBox;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -96,6 +114,10 @@ public class HomePage extends BasePage {
         return this.loginModalIframe.isDisplayed();
     }
 
+    public void waitForModalInvisibility() {
+        waitForInvisibility(loginModalIframe);
+    }
+
     public boolean espnLogoIsDisplayed() {
         super.waitForVisibility(this.espnLogoIframe);
         return this.espnLogoIframe.isDisplayed();
@@ -121,13 +143,41 @@ public class HomePage extends BasePage {
         super.typeOnInput(this.passwordInputIframe, text);
     }
 
+    public void typeOnFirstNameInput(String text) {
+        super.waitForVisibility(this.firstNameInputIframe);
+        super.typeOnInput(this.firstNameInputIframe, text);
+    }
+
+    public void typeOnLastNameInput(String text) {
+        super.waitForVisibility(this.lastNameInputIframe);
+        super.typeOnInput(this.lastNameInputIframe, text);
+    }
+
+    public void typeOnEmailInputForSignUp(String text) {
+        super.waitForVisibility(this.emailForSignUpInputIframe);
+        super.typeOnInput(this.emailForSignUpInputIframe, text);
+    }
+
+    public void typeOnPasswordInputForSignUp(String text) {
+        super.waitForVisibility(this.passwordForSignUpInputIframe);
+        super.typeOnInput(this.passwordForSignUpInputIframe, text);
+    }
+
     public void clickOnLoginButtonIframe() {
         clickElement(this.loginButtonIframe);
     }
 
+    public void clickOnSignUpButtonIframe() {
+        clickElement(this.signUpButtonIframe);
+    }
+
+    public void clickOnSignUpForSignUpButtonIframe() {
+        clickElement(this.signUpButtonForSignUpIframe);
+    }
+
     public WatchPage goToWatchPage() {
-        if (super.waitForReload(this.watchLink)) {
-            super.waitForVisibility(this.watchLink);
+        if (waitForReload(this.watchLink)) {
+            waitForVisibility(this.watchLink);
         }
         super.clickElement(this.watchLink);
         return new WatchPage(getDriver());
@@ -157,5 +207,15 @@ public class HomePage extends BasePage {
     public String getDeleteAccountTitleIframeText() {
         waitForVisibility(deleteAccountTitleIframe);
         return this.deleteAccountTitleIframe.getText();
+    }
+
+    public void waitForLogin() {
+        waitForInvisibility(loginModalIframe);
+        waitForPresenceOfElement("#sideLogin-right-rail[style*='display: none']");
+    }
+
+    public void waitForLogout() {
+        waitForInvisibility(loginModalIframe);
+        waitForPresenceOfElement("#sideLogin-right-rail[style*='display: block']");
     }
 }

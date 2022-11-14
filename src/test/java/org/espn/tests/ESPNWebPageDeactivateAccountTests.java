@@ -21,9 +21,9 @@ public class ESPNWebPageDeactivateAccountTests extends BaseTest {
         homePage.mouseOverUserIcon();
         homePage.clickOnLoginLinkInHomePage();
         homePage.switchToIframe();
-        homePage.typeOnEmailInput(EMAIL);
+        homePage.typeOnEmailInput(email);
         homePage.typeOnPasswordInput(PASSWORD);
         homePage.clickOnLoginButtonIframe();
-        checkThat("Deactivated text is correct", homePage.getDeleteAccountTitleIframeText(), is("Account Deactivated!"));
+        checkThat("Deactivated text is correct", homePage.getDeleteAccountTitleIframeText(), is("Account Deactivated"));
     }
 }

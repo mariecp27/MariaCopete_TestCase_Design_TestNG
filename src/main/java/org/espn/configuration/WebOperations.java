@@ -1,5 +1,6 @@
 package org.espn.configuration;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class WebOperations {
+
     private final WebDriver driver;
     private final WebDriverWait wait;
 
@@ -25,6 +27,7 @@ public class WebOperations {
     }
 
     public void clickElement(WebElement element) {
+        this.waitForVisibility(element);
         this.waitForClickable(element);
         element.click();
     }
@@ -42,8 +45,8 @@ public class WebOperations {
         this.wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void waitForVisibility(List<WebElement> elements) {
-        this.wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+    public void waitForInvisibility(WebElement element) {
+        this.wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
     public boolean waitForReload(WebElement element) {
@@ -63,5 +66,13 @@ public class WebOperations {
     public void mouseOver(WebElement element) {
         this.waitForVisibility(element);
         new Actions(getDriver()).moveToElement(element).perform();
+    }
+
+    public void waitForPresenceOfElement(String locator) {
+        this.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
+    }
+
+    public void waitForPresenceOfElements(String locator) {
+        this.wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(locator)));
     }
 }
