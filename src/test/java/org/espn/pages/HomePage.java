@@ -92,18 +92,10 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    public void switchToBannerIframe() {
-        super.getDriver().switchTo().frame(this.iframeBanner);
-    }
-
-    public void goOutFromBannerIframe() {
-        super.getDriver().switchTo().defaultContent();
-    }
-
-    public boolean verifyBanner() {
+    public boolean verifyBannerIframe() {
         boolean isBanner = true;
         try {
-            super.waitForVisibility(this.banner);
+            super.waitForPresenceOfElement(".promo-banner-container iframe");
         } catch (TimeoutException e) {
             isBanner = false;
         }
@@ -111,8 +103,11 @@ public class HomePage extends BasePage {
     }
 
     public void closeBanner() {
-        if (this.verifyBanner()) {
+        if (this.verifyBannerIframe()) {
+            super.getDriver().switchTo().frame(this.iframeBanner);
+            super.waitForVisibility(this.banner);
             super.clickElement(this.bannerCloseButton);
+            this.goOutFromIframe();
         }
     }
 
