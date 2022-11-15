@@ -9,7 +9,7 @@ public class ESPNWebPageDeactivateAccountTests extends BaseTest {
     @Test
     public void deactivateAccount() {
         generalLoginSteps();
-        homePage.waitForMouseOverUserIcon();
+        homePage.waitForLogin();
         homePage.mouseOverUserIcon();
         homePage.clickOnEspnProfileLink();
         homePage.switchToIframe();
@@ -17,7 +17,7 @@ public class ESPNWebPageDeactivateAccountTests extends BaseTest {
         homePage.clickOnDeleteAccountButtonIframe();
         homePage.clickOnDeleteAccountConfirmationIframe();
         homePage.goOutFromIframe();
-        homePage.waitForMouseOverUserIcon();
+        homePage.waitForLogout();
         homePage.mouseOverUserIcon();
         homePage.clickOnLoginLinkInHomePage();
         homePage.switchToIframe();

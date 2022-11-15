@@ -1,7 +1,7 @@
 package org.espn.configuration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.openqa.selenium.support.PageFactory.initElements;
 import java.time.Duration;
-import java.util.List;
 
 public class WebOperations {
 
@@ -18,7 +17,7 @@ public class WebOperations {
 
     public WebOperations(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5L));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10L));
         initElements(driver, this);
     }
 
@@ -49,23 +48,13 @@ public class WebOperations {
         this.wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
-    public boolean waitForReload(WebElement element) {
-        boolean wasDeleted = true;
-        try {
-            waitForStaleness(element);
-        } catch (TimeoutException e) {
-            wasDeleted = false;
-        }
-        return wasDeleted;
-    }
-
-    public void waitForStaleness(WebElement element) {
-        this.wait.until(ExpectedConditions.stalenessOf(element));
-    }
-
     public void mouseOver(WebElement element) {
         this.waitForVisibility(element);
         new Actions(getDriver()).moveToElement(element).perform();
+    }
+
+    public void scrollDown() {
+        new Actions(getDriver()).sendKeys(Keys.PAGE_DOWN).build().perform();
     }
 
     public void waitForPresenceOfElement(String locator) {
@@ -74,5 +63,9 @@ public class WebOperations {
 
     public void waitForPresenceOfElements(String locator) {
         this.wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(locator)));
+    }
+
+    public void waitForAttributeChange(WebElement element, String attribute, String value) {
+        this.wait.until(ExpectedConditions.attributeToBe(element, attribute, value));
     }
 }

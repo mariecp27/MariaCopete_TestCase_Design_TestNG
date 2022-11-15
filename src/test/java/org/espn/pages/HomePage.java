@@ -9,6 +9,9 @@ public class HomePage extends BasePage {
     @FindBy (id = "global-user-trigger")
     private WebElement userIcon;
 
+    @FindBy (id = "sideLogin-left-rail")
+    private WebElement loginBox;
+
     @FindBy (css = "li.user > div.global-user:last-child")
     private WebElement userOptionsContainer;
 
@@ -21,7 +24,7 @@ public class HomePage extends BasePage {
     @FindBy (id = "oneid-iframe")
     private WebElement iframe;
 
-    @FindBy (css = "div.view-starry-night >div:first-child")
+    @FindBy (css = "div.view-starry-night > div:first-child")
     private WebElement loginModalIframe;
 
     @FindBy (id = "logo")
@@ -75,17 +78,20 @@ public class HomePage extends BasePage {
     @FindBy (css = ".account-deleted-gating + #Title")
     private  WebElement deleteAccountTitleIframe;
 
-    @FindBy (css = "sideLogin-right-rail")
-    private WebElement loginBox;
-
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    public void waitForMouseOverUserIcon() {
-        if (waitForReload(this.userIcon)) {
-            waitForVisibility(this.userIcon);
-        }
+    public void waitForLogin() {
+        super.waitForInvisibility(loginModalIframe);
+        super.waitForPresenceOfElement("#sideLogin-left-rail");
+        super.waitForAttributeChange(loginBox, "style", "display: none;");
+    }
+
+    public void waitForLogout() {
+        super.waitForInvisibility(loginModalIframe);
+        super.waitForPresenceOfElement("#sideLogin-left-rail");
+        super.waitForAttributeChange(loginBox, "style", "display: block;");
     }
 
     public void mouseOverUserIcon() {
@@ -112,10 +118,6 @@ public class HomePage extends BasePage {
     public boolean modalIsDisplayed() {
         super.waitForVisibility(this.loginModalIframe);
         return this.loginModalIframe.isDisplayed();
-    }
-
-    public void waitForModalInvisibility() {
-        waitForInvisibility(loginModalIframe);
     }
 
     public boolean espnLogoIsDisplayed() {
@@ -164,21 +166,18 @@ public class HomePage extends BasePage {
     }
 
     public void clickOnLoginButtonIframe() {
-        clickElement(this.loginButtonIframe);
+        super.clickElement(this.loginButtonIframe);
     }
 
     public void clickOnSignUpButtonIframe() {
-        clickElement(this.signUpButtonIframe);
+        super.clickElement(this.signUpButtonIframe);
     }
 
     public void clickOnSignUpForSignUpButtonIframe() {
-        clickElement(this.signUpButtonForSignUpIframe);
+        super.clickElement(this.signUpButtonForSignUpIframe);
     }
 
     public WatchPage goToWatchPage() {
-        if (waitForReload(this.watchLink)) {
-            waitForVisibility(this.watchLink);
-        }
         super.clickElement(this.watchLink);
         return new WatchPage(getDriver());
     }
@@ -189,33 +188,23 @@ public class HomePage extends BasePage {
     }
 
     public void clickOnEspnProfileLink() {
-        clickElement(this.espnProfileLink);
+        super.clickElement(this.espnProfileLink);
     }
 
     public void clickOnDeleteAccountLinkIframe() {
-        clickElement(this.deleteAccountLinkIframe);
+        super.clickElement(this.deleteAccountLinkIframe);
     }
 
     public void clickOnDeleteAccountButtonIframe() {
-        clickElement(this.deleteAccountButtonIframe);
+        super.clickElement(this.deleteAccountButtonIframe);
     }
 
     public void clickOnDeleteAccountConfirmationIframe() {
-        clickElement(this.deleteAccountConfirmationIframe);
+        super.clickElement(this.deleteAccountConfirmationIframe);
     }
 
     public String getDeleteAccountTitleIframeText() {
-        waitForVisibility(deleteAccountTitleIframe);
+        super.waitForVisibility(deleteAccountTitleIframe);
         return this.deleteAccountTitleIframe.getText();
-    }
-
-    public void waitForLogin() {
-        waitForInvisibility(loginModalIframe);
-        waitForPresenceOfElement("#sideLogin-right-rail[style*='display: none']");
-    }
-
-    public void waitForLogout() {
-        waitForInvisibility(loginModalIframe);
-        waitForPresenceOfElement("#sideLogin-right-rail[style*='display: block']");
     }
 }

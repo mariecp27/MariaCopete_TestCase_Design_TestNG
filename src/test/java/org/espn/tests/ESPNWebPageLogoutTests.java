@@ -9,10 +9,10 @@ public class ESPNWebPageLogoutTests extends BaseTest {
     @Test
     public void doingLogout() {
         generalLoginSteps();
-        homePage.waitForMouseOverUserIcon();
+        homePage.waitForLogin();
         homePage.mouseOverUserIcon();
         homePage.clickOnLogoutLinkInHomePage();
-        homePage.waitForMouseOverUserIcon();
+        homePage.waitForLogout();
         homePage.mouseOverUserIcon();
         checkThat("Welcome text is correct", homePage.getWelcomeText(), is("Welcome!"));
     }

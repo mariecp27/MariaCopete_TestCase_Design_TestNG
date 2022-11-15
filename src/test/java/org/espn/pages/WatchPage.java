@@ -10,14 +10,8 @@ import java.util.List;
 
 public class WatchPage extends BasePage {
 
-    @FindBy (css = "div.Carousel__Wrapper--canScrollRight ul.Carousel__Inner li")
-    private List<WebElement> cardsInCarousel;
-
-    @FindBy (css = "h2.WatchTile__Title")
-    private List<WebElement> cardTitle;
-
-    @FindBy (css = ".WatchTile__Meta")
-    private List<WebElement> streamingSourceDescription;
+    @FindBy (css = "section.Carousel")
+    private List<WebElement> carousels;
 
     @FindBy (css = "div.Carousel__Wrapper--canScrollRight ul.Carousel__Inner li:nth-child(2) > a")
     private WebElement secondCardInCarousel;
@@ -28,30 +22,28 @@ public class WatchPage extends BasePage {
     @FindBy (css = ".lightbox__closebtn")
     private WebElement closeButtonModal;
 
-    @FindBy (css = ".CarouselArrow--right")
-    private WebElement carouselArrow;
-
-    @FindBy (css = "a[href='/watch/collections/40653/tenis/_/redirected/true']:last-child")
-    private WebElement seeAll;
-
     public WatchPage(WebDriver driver) {
         super(driver);
     }
 
+    public List<WebElement> getCadsInSecondCarousel() {
+        return carousels.get(1).findElements(By.cssSelector("ul.Carousel__Inner li"));
+    }
+
     public boolean checkAllCardsTitle() {
         List<Boolean> isTitle = new ArrayList<>();
-        waitForPresenceOfElements("div.Carousel__Wrapper--canScrollRight ul.Carousel__Inner li");
-        cardsInCarousel.stream().forEach(element -> {
-            isTitle.add(element.findElement(By.cssSelector("h2.WatchTile__Title")).isEnabled());
+        waitForPresenceOfElements("ul.Carousel__Inner li");
+        getCadsInSecondCarousel().stream().forEach(element -> {
+            isTitle.add(element.findElement(By.cssSelector("h2.WatchTile__Title")).isDisplayed() && !element.findElement(By.cssSelector("h2.WatchTile__Title")).getText().equals(""));
         });
         return !isTitle.contains(false);
     }
 
     public boolean checkAllCardsDescription() {
         List<Boolean> isDescription = new ArrayList<>();
-        waitForPresenceOfElements("div.Carousel__Wrapper--canScrollRight ul.Carousel__Inner li");
-        cardsInCarousel.stream().forEach(element -> {
-            isDescription.add(element.findElement(By.cssSelector(".WatchTile__Meta")).isEnabled());
+        waitForPresenceOfElements("ul.Carousel__Inner li");
+        getCadsInSecondCarousel().stream().forEach(element -> {
+            isDescription.add(element.findElement(By.cssSelector(".WatchTile__Meta")).isDisplayed() && !element.findElement(By.cssSelector(".WatchTile__Meta")).getText().equals(""));
         });
         return !isDescription.contains(false);
     }

@@ -38,14 +38,14 @@ public class BaseTest {
         homePage.typeOnLastNameInput(USER);
         homePage.typeOnEmailInputForSignUp(email);
         homePage.typeOnPasswordInputForSignUp(PASSWORD);
+        homePage.scrollDown();
         homePage.clickOnSignUpForSignUpButtonIframe();
-        homePage.clickOnSignUpForSignUpButtonIframe();
-        homePage.waitForModalInvisibility();
         homePage.goOutFromIframe();
-        homePage.waitForMouseOverUserIcon();
+        homePage.waitForLogin();
         homePage.mouseOverUserIcon();
+        checkThat("Welcome text is correct", homePage.getWelcomeText(), is(USER_WELCOME));
         homePage.clickOnLogoutLinkInHomePage();
-        homePage.waitForMouseOverUserIcon();
+        homePage.waitForLogout();
         homePage.mouseOverUserIcon();
         checkThat("Welcome text is correct", homePage.getWelcomeText(), is("Welcome!"));
     }

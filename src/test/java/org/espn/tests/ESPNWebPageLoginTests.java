@@ -20,9 +20,10 @@ public class ESPNWebPageLoginTests extends BaseTest {
         homePage.typeOnPasswordInput(PASSWORD);
         homePage.clickOnLoginButtonIframe();
         homePage.goOutFromIframe();
+        homePage.waitForLogin();
         WatchPage watchPage = homePage.goToWatchPage();
-        checkThat("All cards in carousel has title", watchPage.checkAllCardsTitle(), is(true));
-        checkThat("All cards in carousel has description", watchPage.checkAllCardsDescription(), is(true));
+        checkThat("All cards in the second carousel have a title", watchPage.checkAllCardsTitle(), is(true));
+        checkThat("All cards in the second carousel have a description", watchPage.checkAllCardsDescription(), is(true));
         watchPage.clickCard();
         checkThat("Close button is visible", watchPage.closeButtonModalIsDisplayed(), is(true));
         watchPage.clickOnCloseButtonModal();
@@ -30,7 +31,7 @@ public class ESPNWebPageLoginTests extends BaseTest {
         homePage.mouseOverUserIcon();
         checkThat("Welcome text is correct", homePage.getWelcomeText(), is(USER_WELCOME));
         homePage.clickOnLogoutLinkInHomePage();
-        homePage.waitForMouseOverUserIcon();
+        homePage.waitForLogout();
         homePage.mouseOverUserIcon();
         checkThat("Welcome text is correct", homePage.getWelcomeText(), is("Welcome!"));
     }
