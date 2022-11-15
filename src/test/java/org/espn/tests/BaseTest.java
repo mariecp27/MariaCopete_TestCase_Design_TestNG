@@ -30,6 +30,9 @@ public class BaseTest {
         driver.getDriver().get(url);
         driver.getDriver().manage().window().maximize();
         homePage = new HomePage(driver.getDriver());
+        homePage.switchToBannerIframe();
+        homePage.closeBanner();
+        homePage.goOutFromBannerIframe();
         homePage.mouseOverUserIcon();
         homePage.clickOnLoginLinkInHomePage();
         homePage.switchToIframe();

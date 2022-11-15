@@ -1,10 +1,20 @@
 package org.espn.pages;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
+
+    @FindBy (css = ".promo-banner-container iframe")
+    private WebElement iframeBanner;
+
+    @FindBy (css = "section.PromoBanner")
+    private WebElement banner;
+
+    @FindBy (css = "div.PromoBanner__CloseBtn")
+    private WebElement bannerCloseButton;
 
     @FindBy (id = "global-user-trigger")
     private WebElement userIcon;
@@ -80,6 +90,30 @@ public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
         super(driver);
+    }
+
+    public void switchToBannerIframe() {
+        super.getDriver().switchTo().frame(this.iframeBanner);
+    }
+
+    public void goOutFromBannerIframe() {
+        super.getDriver().switchTo().defaultContent();
+    }
+
+    public boolean verifyBanner() {
+        boolean isBanner = true;
+        try {
+            super.waitForVisibility(this.banner);
+        } catch (TimeoutException e) {
+            isBanner = false;
+        }
+        return isBanner;
+    }
+
+    public void closeBanner() {
+        if (this.verifyBanner()) {
+            super.clickElement(this.bannerCloseButton);
+        }
     }
 
     public void waitForLogin() {
