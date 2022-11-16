@@ -1,7 +1,6 @@
 package org.espn.configuration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -51,10 +50,6 @@ public class WebOperations {
     public void mouseOver(WebElement element) {
         this.waitForVisibility(element);
         new Actions(getDriver()).moveToElement(element).perform();
-    }
-
-    public void scrollDown() {
-        new Actions(getDriver()).sendKeys(Keys.PAGE_DOWN).build().perform();
     }
 
     public void waitForPresenceOfElement(String locator) {

@@ -39,7 +39,7 @@ public class BaseTest {
         homePage.typeOnLastNameInput(USER);
         homePage.typeOnEmailInputForSignUp(email);
         homePage.typeOnPasswordInputForSignUp(PASSWORD);
-        homePage.scrollDown();
+        homePage.mouseOverSignUpForSignUpButtonIframe();
         homePage.clickOnSignUpForSignUpButtonIframe();
         homePage.goOutFromIframe();
         homePage.waitForLogin();

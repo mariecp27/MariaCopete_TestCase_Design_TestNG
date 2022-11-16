@@ -206,6 +206,10 @@ public class HomePage extends BasePage {
         super.clickElement(this.signUpButtonForSignUpIframe);
     }
 
+    public void mouseOverSignUpForSignUpButtonIframe() {
+        super.mouseOver(this.signUpButtonForSignUpIframe);
+    }
+
     public WatchPage goToWatchPage() {
         super.clickElement(this.watchLink);
         return new WatchPage(getDriver());

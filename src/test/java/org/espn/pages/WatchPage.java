@@ -54,6 +54,7 @@ public class WatchPage extends BasePage {
     }
 
     public boolean closeButtonModalIsDisplayed() {
+        super.waitForVisibility(this.providerModal);
         super.waitForVisibility(this.closeButtonModal);
         return this.closeButtonModal.isDisplayed();
     }
