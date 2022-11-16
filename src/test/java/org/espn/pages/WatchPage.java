@@ -60,6 +60,7 @@ public class WatchPage extends BasePage {
     }
 
     public void clickOnCloseButtonModal() {
+        super.mouseOver(this.closeButtonModal);
         super.clickElement(this.closeButtonModal);
     }
 
